@@ -12,12 +12,12 @@ public final class StringExprLoop {
   }
   
   public int index(byte[] byteS, int start, int len) {
-    if (len < pattern.length) {
+    if (len < plen) {
       return -1;
     }
-    int end = start + len - pattern.length + 1;
+    int end = start + len - plen + 1;
     for (int i = start; i < end; i++) {
-      if (equal(pattern, 0, pattern.length, byteS, i, pattern.length)) {
+      if (equal(pattern, 0, plen, byteS, i, plen)) {
         return i;
       }
     }

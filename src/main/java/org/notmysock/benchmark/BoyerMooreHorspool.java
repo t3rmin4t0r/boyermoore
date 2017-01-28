@@ -3,7 +3,7 @@ package org.notmysock.benchmark;
 import java.util.Arrays;
 
 public final class BoyerMooreHorspool {
-  private int MAX_BYTE = 0xff;
+  private static final int MAX_BYTE = 0xff;
   private final long[] shift = new long[MAX_BYTE];
   private final byte[] pattern;
   private final int plen; 
@@ -12,7 +12,7 @@ public final class BoyerMooreHorspool {
     this.plen = pattern.length;
     Arrays.fill(shift, plen);
     for (int i = 0; i < plen - 1; i++) {
-      shift[pattern[i]] = plen - i - 1;
+      shift[pattern[i] & MAX_BYTE] = plen - i - 1;
     }
   }
   
@@ -31,7 +31,7 @@ public final class BoyerMooreHorspool {
         }
         s_tmp--;
       }
-      next += shift[input[next]];
+      next += shift[input[next] & MAX_BYTE];
     }
     return -1;
   }
